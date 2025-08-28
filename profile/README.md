@@ -119,6 +119,8 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
 <img src="https://img.shields.io/badge/Arduino-008184?style=for-the-badge&logo=arduino&logoColor=white">
 <img src="https://img.shields.io/badge/C/C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white">
 
+### Backend
+
 <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white">
 <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white">
 <img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white">
@@ -135,44 +137,45 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
 
 ```
 2025ESWContest_자유공모_1091_와인퀸_파일구조
-├── backend-repo
-│ ├── main.py
-│ ├── requirements.txt
-│ ├── README.md
-│ ├── .gitignore
-│ ├── pycache/ # 실행 시 생성
-│ ├── best.pt # YOLO 가중치
-│ ├── best_wCrop.pt # YOLO 가중치(crop 버전)
-│ ├── yolov8n.pt # YOLOv8n 가중치
-│ ├── yolov8n_100.pt # 커스텀 가중치(100)
-│ └── yolov8n_200.pt # 커스텀 가중치(200)
-└── frontend-repo
-frontend-repo/
-├─ node_modules/                 # 패키지 설치 폴더 (VCS 제외 권장)
-├─ index.html                    # Vite 진입 HTML
-└─ src/
-   ├─ assets/                    # 정적 리소스(SVG, 이미지)
-   │  ├─ chevron.svg
-   │  ├─ Icon.svg
-   │  └─ Wine_1.svg
-   ├─ constants/                 # 상수/환경/엔드포인트 등
-   │  └─ constants.ts
-   ├─ lib/                       # 공용 유틸/클라이언트
-   │  └─ ws.ts                   # WebSocket 유틸/싱글턴 등
-   ├─ pages/                     # 라우트 단위 페이지 컴포넌트
-   │  ├─ Splash.tsx
-   │  ├─ MainPage.tsx
-   │  ├─ ConfirmSeal.tsx
-   │  ├─ ConfirmOpen.tsx
-   │  ├─ OpenWine.tsx
-   │  ├─ CloseWine.tsx
-   │  └─ Explation.tsx           # (오타 의도면 OK, 보통 Explanation)
-   ├─ router/                    # 라우터 설정
-   │  └─ Router.tsx
-   ├─ styles/                    # 전역 스타일 & 앱 쉘
-   │  ├─ App.tsx                 # 앱 루트 컴포넌트
-   │  └─ index.css               # 전역 CSS
-   └─ main.tsx                   # React 엔트리(ReactDOM.createRoot)
+|
+├── App
+    ├── Backend
+    │   ├── main.py
+    │   ├── requirements.txt
+    │   ├── README.md
+    │   ├── .gitignore
+    │   ├── pycache/ # 실행 시 생성
+    │   ├── best.pt # YOLO 가중치
+    │   ├── best_wCrop.pt # YOLO 가중치(crop 버전)
+    │   ├── yolov8n.pt # YOLOv8n 가중치
+    │   ├── yolov8n_100.pt # 커스텀 가중치(100)
+    │   └── yolov8n_200.pt # 커스텀 가중치(200)
+    └──Frontend
+        ├─ node_modules/                 # 패키지 설치 폴더 (VCS 제외 권장)
+        ├─ index.html                    # Vite 진입 HTML
+        └─ src/
+            ├─ assets/                    # 정적 리소스(SVG, 이미지)
+            │  ├─ chevron.svg
+            │  ├─ Icon.svg
+            │  └─ Wine_1.svg
+            ├─ constants/                 # 상수/환경/엔드포인트 등
+            │  └─ constants.ts
+            ├─ lib/                       # 공용 유틸/클라이언트
+            │  └─ ws.ts                   # WebSocket 유틸/싱글턴 등
+            ├─ pages/                     # 라우트 단위 페이지 컴포넌트
+            │  ├─ Splash.tsx
+            │  ├─ MainPage.tsx
+            │  ├─ ConfirmSeal.tsx
+            │  ├─ ConfirmOpen.tsx
+            │  ├─ OpenWine.tsx
+            │  ├─ CloseWine.tsx
+            │  └─ Explation.tsx           # (오타 의도면 OK, 보통 Explanation)
+            ├─ router/                    # 라우터 설정
+            │  └─ Router.tsx
+            ├─ styles/                    # 전역 스타일 & 앱 쉘
+            ├─ App.tsx                 # 앱 루트 컴포넌트
+            ├─ index.css               # 전역 CSS
+            └─ main.tsx                   # React 엔트리(ReactDOM.createRoot)
 
 ```
 
@@ -182,13 +185,13 @@ frontend-repo/
 
 ## Team Member
 
-<img src="images/team.png" width="300" height="300">
+<img src="assets/team.png" width="300" height="300">
 
 <br>
 
 | 팀원             | 역할                          |
 | ---------------- | ----------------------------- |
-| **이준형(팀장)** | 로봇 제어/시퀀스·통합         |
-| **최준서**       | 비전·YOLO 추론/정렬 로직      |
-| **최민혁**       | FastAPI 서버/시리얼 브릿지    |
-| **김용진**       | React UI/스트리밍·상태 시각화 |
+| **이준형(팀장)** | 하드웨어 제어/시퀀스·통합     |
+| **최준서**       | React UI/스트리밍·상태 시각화 |
+| **최민혁**       | 하드웨어 설계/제작            |
+| **김용진**       | FastAPI 서버/시리얼 브릿지    |
