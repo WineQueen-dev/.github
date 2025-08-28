@@ -12,7 +12,7 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
 
 ## 📸 Overview
 
-<img src="assets/TempOverview.png" width="700" height="400">
+<img src="assets/Overview.svg" width="700" height="400">
 
 <br>
 
