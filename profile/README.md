@@ -133,32 +133,48 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
 
 ## File Architecture
 
-.
-├─ backend-repo/
-│ ├─ main.py
-│ ├─ requirements.txt
-│ ├─ README.md
-│ ├─ .gitignore
-│ ├─ **pycache**/ # 파이썬 바이트코드 (실행 시 생성)
-│ ├─ best.pt # YOLO 가중치
-│ ├─ best_wCrop.pt # YOLO 가중치 (crop 버전)
-│ ├─ yolov8n.pt # YOLOv8n 가중치
-│ ├─ yolov8n_100.pt # YOLOv8n 커스텀 가중치(100)
-│ └─ yolov8n_200.pt # YOLOv8n 커스텀 가중치(200)
-└─ frontend-repo/
-├─ src/ # React + TS 소스
-├─ index.html
-├─ package.json
-├─ package-lock.json
-├─ README.md
-├─ .gitignore
-├─ tsconfig.json
-├─ tsconfig.app.json
-├─ tsconfig.node.json
-├─ vercel.json # (사용 시) Vercel 배포 설정
-├─ vite.config.ts # Vite 번들러 설정
-├─ yarn.lock
-└─ node_modules/ # 패키지 설치 폴더 (버전관리 제외)
+```
+2025ESWContest_자유공모_1091_와인퀸_파일구조
+├── backend-repo
+│ ├── main.py
+│ ├── requirements.txt
+│ ├── README.md
+│ ├── .gitignore
+│ ├── pycache/ # 실행 시 생성
+│ ├── best.pt # YOLO 가중치
+│ ├── best_wCrop.pt # YOLO 가중치(crop 버전)
+│ ├── yolov8n.pt # YOLOv8n 가중치
+│ ├── yolov8n_100.pt # 커스텀 가중치(100)
+│ └── yolov8n_200.pt # 커스텀 가중치(200)
+└── frontend-repo
+frontend-repo/
+├─ node_modules/                 # 패키지 설치 폴더 (VCS 제외 권장)
+├─ index.html                    # Vite 진입 HTML
+└─ src/
+   ├─ assets/                    # 정적 리소스(SVG, 이미지)
+   │  ├─ chevron.svg
+   │  ├─ Icon.svg
+   │  └─ Wine_1.svg
+   ├─ constants/                 # 상수/환경/엔드포인트 등
+   │  └─ constants.ts
+   ├─ lib/                       # 공용 유틸/클라이언트
+   │  └─ ws.ts                   # WebSocket 유틸/싱글턴 등
+   ├─ pages/                     # 라우트 단위 페이지 컴포넌트
+   │  ├─ Splash.tsx
+   │  ├─ MainPage.tsx
+   │  ├─ ConfirmSeal.tsx
+   │  ├─ ConfirmOpen.tsx
+   │  ├─ OpenWine.tsx
+   │  ├─ CloseWine.tsx
+   │  └─ Explation.tsx           # (오타 의도면 OK, 보통 Explanation)
+   ├─ router/                    # 라우터 설정
+   │  └─ Router.tsx
+   ├─ styles/                    # 전역 스타일 & 앱 쉘
+   │  ├─ App.tsx                 # 앱 루트 컴포넌트
+   │  └─ index.css               # 전역 CSS
+   └─ main.tsx                   # React 엔트리(ReactDOM.createRoot)
+
+```
 
 ## Video
 
