@@ -137,45 +137,92 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
 
 ```
 2025ESWContest_자유공모_1091_와인퀸_파일구조
-|
-├── App
-    ├── Backend
-    │   ├── main.py
-    │   ├── requirements.txt
-    │   ├── README.md
-    │   ├── .gitignore
-    │   ├── pycache/ # 실행 시 생성
-    │   ├── best.pt # YOLO 가중치
-    │   ├── best_wCrop.pt # YOLO 가중치(crop 버전)
-    │   ├── yolov8n.pt # YOLOv8n 가중치
-    │   ├── yolov8n_100.pt # 커스텀 가중치(100)
-    │   └── yolov8n_200.pt # 커스텀 가중치(200)
-    └──Frontend
-        ├─ node_modules/                 # 패키지 설치 폴더 (VCS 제외 권장)
-        ├─ index.html                    # Vite 진입 HTML
-        └─ src/
-            ├─ assets/                    # 정적 리소스(SVG, 이미지)
-            │  ├─ chevron.svg
-            │  ├─ Icon.svg
-            │  └─ Wine_1.svg
-            ├─ constants/                 # 상수/환경/엔드포인트 등
-            │  └─ constants.ts
-            ├─ lib/                       # 공용 유틸/클라이언트
-            │  └─ ws.ts                   # WebSocket 유틸/싱글턴 등
-            ├─ pages/                     # 라우트 단위 페이지 컴포넌트
-            │  ├─ Splash.tsx
-            │  ├─ MainPage.tsx
-            │  ├─ ConfirmSeal.tsx
-            │  ├─ ConfirmOpen.tsx
-            │  ├─ OpenWine.tsx
-            │  ├─ CloseWine.tsx
-            │  └─ Explation.tsx           # (오타 의도면 OK, 보통 Explanation)
-            ├─ router/                    # 라우터 설정
-            │  └─ Router.tsx
-            ├─ styles/                    # 전역 스타일 & 앱 쉘
-            ├─ App.tsx                 # 앱 루트 컴포넌트
-            ├─ index.css               # 전역 CSS
-            └─ main.tsx                   # React 엔트리(ReactDOM.createRoot)
+.
+├─ HW/                                   # 하드웨어(아두이노/메카/회로)
+│  ├─ arduino/
+│  │  ├─ src/
+│  │  │  ├─ HW_Control.ino               # 메인 펌웨어 (시리얼 프로토콜 준수)
+│  │  │  └─ modules/                     # 모터/전자석/압력센서 서브모듈
+│  │  └─ include/
+│  │     ├─ Constants/
+│  │     ├─ CUP/
+│  │     ├─ Queue/
+│  │     ├─ StepperMulti/
+│  │     └─ Waterpump/
+│  ├─ mechanics/                         # 3D 모델/출력물
+│  │  ├─ cad/                            # Fusion 360 등 원본
+│  │  └─ prints/                         # STL, gcode
+│  ├─ electronics/                       # 회로/배선
+│  │  ├─ schematics/                     # 회로도
+│  │  └─ bom.csv                         # 자재 목록(BOM)
+│  └─ protocol/                          # HW<->Backend 공통 프로토콜(단일 소스)
+│     ├─ messages.yaml                   # 명령/응답/상태 코드 정의 (단일 진실)
+│     ├─ generate_protocol.py            # yaml → python(백엔드)/c(아두이노) 생성 스크립트
+│     ├─ templates/
+│     │  ├─ arduino_protocol.h.j2
+│     │  └─ backend_protocol.py.j2
+│     └─ README.md
+│
+└─ Display/                              # 사용자에 보이는 모든 소프트웨어
+   ├─ Backend/                           # FastAPI (비전/제어/시리얼/WS)
+   │  ├─ app/
+   │  │  ├─ main.py                      # 엔트리 (uvicorn)
+   │  │  ├─ api/                         # REST/WebSocket 엔드포인트
+   │  │  │  ├─ routes.py
+   │  │  │  └─ ws.py                     # 실시간 상태/로그 스트림
+   │  │  ├─ control/                     # 상태머신/시퀀스 제어
+   │  │  │  ├─ state_machine.py
+   │  │  │  └─ alignment.py
+   │  │  ├─ vision/                      # YOLO 추론/후처리
+   │  │  │  ├─ infer.py
+   │  │  │  └─ postprocess.py
+   │  │  ├─ serial_bridge/               # Arduino UART 브릿지
+   │  │  │  ├─ uart.py
+   │  │  │  └─ protocol.py               # (HW/protocol에서 생성된 파일)
+   │  │  ├─ schemas/                     # DTO/Pydantic
+   │  │  │  └─ types.py
+   │  │  ├─ services/                    # 비즈 로직(압력 모니터 등)
+   │  │  ├─ utils/                       # 공통 유틸(로그/시간/필터)
+   │  │  └─ config.py                    # 환경변수/포트/시리얼 경로 등
+   │  ├─ models/
+   │  │  └─ weights/                     # YOLO 가중치 (Git LFS 권장)
+   │  │     ├─ best.pt
+   │  │     ├─ best_wCrop.pt
+   │  │     ├─ yolov8n.pt
+   │  │     ├─ yolov8n_100.pt
+   │  │     └─ yolov8n_200.pt
+   │  ├─ requirements.txt
+   │  ├─ README.md
+   │  ├─ .gitignore
+   │  └─ __pycache__/                    # 실행 시 생성
+   │
+   └─ Frontend/                          # React + TS (Vite)
+      ├─ index.html
+      ├─ src/
+      │  ├─ assets/                      # 정적 리소스(SVG, 이미지)
+      │  │  ├─ chevron.svg
+      │  │  ├─ Icon.svg
+      │  │  ├─ Wine_1.svg
+      │  │  └─ Wine_2.svg
+      │  ├─ constants/
+      │  │  └─ constants.ts              # API/WS 엔드포인트, 테마 상수 등
+      │  ├─ lib/
+      │  │  └─ ws.ts                     # WebSocket 유틸/싱글턴
+      │  ├─ pages/                       # 라우트 단위 화면
+      │  │  ├─ Splash.tsx
+      │  │  ├─ MainPage.tsx
+      │  │  ├─ ConfirmSeal.tsx
+      │  │  ├─ ConfirmOpen.tsx
+      │  │  ├─ OpenWine.tsx
+      │  │  ├─ CloseWine.tsx
+      │  │  └─ Explation.tsx             # (필요 시 Explanation.tsx로 변경 권장)
+      │  ├─ router/
+      │  │  └─ Router.tsx
+      │  ├─ styles/
+      │  │  └─ index.css
+      │  ├─ App.tsx                      # 앱 루트/레이아웃
+      │  └─ main.tsx                     # React 엔트리
+      └─ yarn.lock
 
 ```
 
