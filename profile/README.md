@@ -24,7 +24,7 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
 6. 진공 노즐 위치 정렬
 7. 진공 펌프 ON → 기압 센서로 목표 압력 도달 확인
 8. 펌프 OFF 및 초기 위치 복귀
-9. UI에 진행 상태·완료 표시
+9. UI에 진행 상태 표시 후 메인 페이지로 복귀
 
 ## 👀 Main feature
 
@@ -216,6 +216,7 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
 <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=111827">
 <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white">
+<img src="https://img.shields.io/badge/CSS%20Modules-1572B6?style=for-the-badge&logo=css3&logoColor=white">
 <img src="https://img.shields.io/badge/WebSocket-000000?style=for-the-badge&logo=socketdotio&logoColor=white">
 
 ## File Architecture
@@ -287,8 +288,7 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
       │  ├─ assets/                      # 정적 리소스(SVG, 이미지)
       │  │  ├─ chevron.svg
       │  │  ├─ Icon.svg
-      │  │  ├─ Wine_1.svg
-      │  │  └─ Wine_2.svg
+      │  │  └─ Wine_1.svg
       │  ├─ constants/
       │  │  └─ constants.ts              # API/WS 엔드포인트, 테마 상수 등
       │  ├─ lib/
