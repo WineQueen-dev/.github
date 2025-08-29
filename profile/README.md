@@ -100,7 +100,7 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
   - **API(Controller)**: REST/WebSocket 엔드포인트, 상태 조회·명령 수신.
   - **YOLO Inference**: 프레임 캡처, 추론, 중심 오차 계산.
   - **Control Logic**: 정렬/시퀀스 상태 머신, 타이밍·안전 인터록.
-  - **Serial Bridge**: Arduino(UART)와 명령/ACK 교환, 재시도·타임아웃.
+  - **Serial Bridge**: Arduino(UART)와 명령/ACK 교환, 버튼 동작 전달, 재시도·타임아웃.
   - **Pressure Monitor**: 목표 압력 도달, 히스테리시스, 이동평균 필터.
   </details>
 
