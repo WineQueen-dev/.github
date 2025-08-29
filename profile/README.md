@@ -128,6 +128,8 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
 - ### OpenPage
   카메라가 와인의 뚜껑부를 인식하고 로봇팔로 개봉하는 과정을 MJPEG 스트리밍 방식을 통해서 웹에서 사용자에게 보여줍니다.
 
+</details>
+
 ## Environment
 
 ### Embedded
@@ -149,8 +151,6 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=111827">
 <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white">
 <img src="https://img.shields.io/badge/WebSocket-000000?style=for-the-badge&logo=socketdotio&logoColor=white">
-
-</details>
 
 ## File Architecture
 
