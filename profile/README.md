@@ -106,7 +106,7 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
 
   #### 2. Device UI(Web)
 
-  <img src="images/ui.png" width="700" height="400">
+  <img src="assets/DeviceUI.svg" width="800" height="400">
 
   <br>
 
