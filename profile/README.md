@@ -89,20 +89,81 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
 
 - ### 3️⃣ 서버 및 디스플레이
 
-  #### 1. 서버(FastAPI)
+  #### 1. 서버(FastAPI, OpenCV)
 
-  <img src="images/server.png" width="700" height="400">
+  <img src="assets/Server.svg" width="700" height="400">
 
   <br>
   <details>
-    <summary>module 상세설명 ⏬</summary>
+    <summary>백엔드 module 상세설명 ⏬</summary>
 
   - **API(Controller)**: REST/WebSocket 엔드포인트, 상태 조회·명령 수신.
   - **YOLO Inference**: 프레임 캡처, 추론, 중심 오차 계산.
   - **Control Logic**: 정렬/시퀀스 상태 머신, 타이밍·안전 인터록.
   - **Serial Bridge**: Arduino(UART)와 명령/ACK 교환, 버튼 동작 전달, 재시도·타임아웃.
   - **Pressure Monitor**: 목표 압력 도달, 히스테리시스, 이동평균 필터.
-  </details>
+    </details>
+    <details>
+      <summary>함수 상세설명 ⏬</summary>
+
+        - ### 1) Ensure_Camera_Open (`ensure_camera_open`)
+        - **역할**: 카메라 장치 오픈 및 해상도(640×480) 설정.
+        - **호출 위치**: `detection_loop()` 루프 내(닫혀 있으면 재오픈 시도).
+        - **입력/출력**: 없음 / `boolean`(성공 여부).
+
+        ---
+
+        - ### 2) broadcast_detections *(async task)*
+        - **역할**: 최신 감지 JSON(`latest_detections_json`)을 모든 WebSocket 클라이언트로 **주기(100ms)** 브로드캐스트.
+        - **호출 위치**: FastAPI `lifespan`에서 `asyncio.create_task(...)`.
+        - **입력/출력**: 공유 버퍼에서 읽음 / WS 텍스트 프레임 전송.
+        - **동시성**: `detections_lock` 사용, 전송 실패 클라이언트 제거.
+
+        ---
+
+        - ### 3) generate_annotated_frame *(generator)*
+        - **역할**: 최신 주석 프레임(`latest_annotated_frame`)을 **MJPEG** 스트림 조각으로 생성.
+        - **호출 위치**: `GET /video_feed`에서 `StreamingResponse(generate_annotated_frame())`.
+        - **출력 형식**: `multipart/x-mixed-replace; boundary=frame` + `Content-Type: image/jpeg`.
+
+        ---
+
+        - ### 4) broadcast_buttons *(async task)*
+        - **역할**: 하드웨어 버튼 이벤트를 WebSocket으로 실시간 브로드캐스트.
+        - **호출 위치**: `lifespan`에서 백그라운드 태스크로 실행.
+        - **입력/출력**: `button_queue`(blocking) 소비 / `{"type":"button","value":<1|2|3>}` 전송.
+        - **동시성**: `Queue.get()`은 `run_in_executor`로 안전하게 호출.
+
+        ---
+
+        - ### 5) Ensure_Serial_Open (`ensure_serial_open`)
+        - **역할**: Arduino와의 시리얼 포트 연결 보증(미열림 시 오픈).
+        - **호출 위치**: `send_serial_command()` 및 `serial_reader_loop()` 시작/재시도 시.
+        - **설정**: `SERIAL_PORT`, `BAUD_RATE`; 오픈 후 2초 대기(아두이노 리셋).
+        - **반환값**: `boolean`; 실패 시 `ser=None`로 두고 로그 출력.
+
+        ---
+
+        - ### 6) Detection_loop (`detection_loop`)
+        - **역할**: **백그라운드 스레드** 핵심 루프.
+          1. `ensure_camera_open()` → 프레임 캡처
+          2. YOLO 추론 → 첫 박스 기준 중심/상대좌표 계산
+          3. 상태가 **`ALIGNING`** 일 때 정렬 신호 전송
+            - 데드존(±10px) 밖: `'left'/'right'`, 데드존 내: `'center'`
+            - `'center'` 시 목표 작업(`TARGET_ACTION='S'|'O'`)을 시리얼로 전송 → 상태 **`SEALING/OPENING`**, `PROCESS_START_TIME` 기록
+            - `PROCESS_DURATION(기본 4s)` 경과 시 **`STAY`**로 복귀
+          4. 주석 프레임(JPEG)·감지 JSON을 공유 버퍼에 갱신
+        - **공유자원 보호**: `state_lock`, `serial_lock`, `frame_lock`, `detections_lock`.
+
+        ---
+
+        ### 7) serial_reader_loop
+        - **역할**: 시리얼 입력을 지속 수신하여 버튼 이벤트를 파싱/발행.
+        - **프로토콜**: `"BTN:<n>"` 또는 `"1"|"2"|"3"`.
+        - **디바운스**: `BTN_DEBOUNCE_MS=150ms`(연타/채터링 방지).
+        - **출력**: 전역 `last_button` 갱신, `button_queue.put_nowait(n)`로 브로드캐스트 라인 전달.
+
+      </details>
 
   #### 2. Device UI(Web)
 
