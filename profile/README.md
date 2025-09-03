@@ -37,8 +37,6 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
 
   #### 1. 뚜껑 픽업 & 정렬
 
-  <img src="images/state_machine_pick_align.png" width="700" height="400">
-
   <br>
   <details>
     <summary>state 상세설명 ⏬</summary>
@@ -55,8 +53,6 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
 
   #### 2. 진공 시퀀스
 
-  <img src="images/state_machine_vacuum.png" width="700" height="400">
-
   <br>
   <details>
     <summary>state 상세설명 ⏬</summary>
@@ -72,8 +68,6 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
   </details>
 
   #### 3. 개봉(Release) 시퀀스
-
-  <img src="images/state_machine_release.png" width="700" height="400">
 
   <br>
   <details>
@@ -285,7 +279,6 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
 
 ## Video
 
-- (시연 영상 링크 또는 썸네일 이미지)
   <img src="assets/HW.png" width="300" height="500">
 
 ## Team Member
