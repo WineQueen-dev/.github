@@ -244,10 +244,9 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
 │  └─ protocol/                          # HW<->Backend 공통 프로토콜(단일 소스)
 │     ├─ messages.yaml                   # 명령/응답/상태 코드 정의 (단일 진실)
 │     ├─ generate_protocol.py            # yaml → python(백엔드)/c(아두이노) 생성 스크립트
-│     ├─ templates/
-│     │  ├─ arduino_protocol.h.j2
-│     │  └─ backend_protocol.py.j2
-│     └─ README.md
+│     └─ templates/
+│        ├─ arduino_protocol.h.j2
+│        └─ backend_protocol.py.j2
 │
 └─ Display/                              # 사용자에 보이는 모든 소프트웨어
    ├─ Backend/                           # FastAPI (비전/제어/시리얼/WS)
@@ -270,18 +269,13 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
    │  │  ├─ services/                    # 비즈 로직(압력 모니터 등)
    │  │  ├─ utils/                       # 공통 유틸(로그/시간/필터)
    │  │  └─ config.py                    # 환경변수/포트/시리얼 경로 등
-   │  ├─ models/
-   │  │  └─ weights/                     # YOLO 가중치 (Git LFS 권장)
-   │  │     ├─ best.pt
-   │  │     ├─ best_wCrop.pt
-   │  │     ├─ yolov8n.pt
-   │  │     ├─ yolov8n_100.pt
-   │  │     └─ yolov8n_200.pt
-   │  ├─ requirements.txt
-   │  ├─ README.md
-   │  ├─ .gitignore
-   │  └─ __pycache__/                    # 실행 시 생성
-   │
+   │  └─ models/
+   │     └─ weights/                     # YOLO 가중치 (Git LFS 권장)
+   │        ├─ best.pt
+   │        ├─ best_wCrop.pt
+   │        ├─ yolov8n.pt
+   │        ├─ yolov8n_100.pt
+   │        └─ yolov8n_200.pt
    └─ Frontend/                          # React + TS (Vite)
       ├─ index.html
       ├─ src/
@@ -290,17 +284,14 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
       │  │  ├─ Icon.svg
       │  │  └─ Wine_1.svg
       │  ├─ constants/
-      │  │  └─ constants.ts              # API/WS 엔드포인트, 테마 상수 등
+      │  │  └─ constants.ts              # API/WS 엔드포인트, 네트워크 상수 등
       │  ├─ lib/
       │  │  └─ ws.ts                     # WebSocket 유틸/싱글턴
       │  ├─ pages/                       # 라우트 단위 화면
       │  │  ├─ Splash.tsx
       │  │  ├─ MainPage.tsx
-      │  │  ├─ ConfirmSeal.tsx
-      │  │  ├─ ConfirmOpen.tsx
       │  │  ├─ OpenWine.tsx
-      │  │  ├─ CloseWine.tsx
-      │  │  └─ Explation.tsx             # (필요 시 Explanation.tsx로 변경 권장)
+      │  │  └─ CloseWine.tsx
       │  ├─ router/
       │  │  └─ Router.tsx
       │  ├─ styles/
@@ -325,6 +316,6 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
 | 팀원             | 역할                                       |
 | ---------------- | ------------------------------------------ |
 | **이준형(팀장)** | 하드웨어 제어/시퀀스·통합/기획             |
-| **최준서**       | React UI/스트리밍·상태 시각화/ 웹소켓 연결 |
-| **최민혁**       | 하드웨어 설계 및 3D모델링/제작/기획        |
 | **김용진**       | FastAPI 서버/시리얼 브릿지/3D 프린팅       |
+| **최민혁**       | 하드웨어 설계 및 3D모델링/제작/기획        |
+| **최준서**       | React UI/스트리밍·상태 시각화/ 웹소켓 연결 |
