@@ -224,70 +224,70 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
 ```
 2025ESWContest_자유공모_1091_와인퀸_파일구조
 .
-├─ HW/                                   # 하드웨어(아두이노/메카/회로)
+├─ HW/
 │  ├─ arduino/
 │  │  ├─ src/
-│  │  │  ├─ HW_Control.ino               # 메인 펌웨어 (시리얼 프로토콜 준수)
-│  │  │  └─ modules/                     # 모터/전자석/압력센서 서브모듈
+│  │  │  ├─ HW_Control.ino
+│  │  │  └─ modules/
 │  │  └─ include/
 │  │     ├─ Constants/
 │  │     ├─ CUP/
 │  │     ├─ Queue/
 │  │     ├─ StepperMulti/
 │  │     └─ Waterpump/
-│  ├─ mechanics/                         # 3D 모델/출력물
-│  │  ├─ cad/                            # Fusion 360 등 원본
-│  │  └─ prints/                         # STL, gcode
-│  ├─ electronics/                       # 회로/배선
-│  │  ├─ schematics/                     # 회로도
-│  │  └─ bom.csv                         # 자재 목록(BOM)
-│  └─ protocol/                          # HW<->Backend 공통 프로토콜(단일 소스)
-│     ├─ messages.yaml                   # 명령/응답/상태 코드 정의 (단일 진실)
-│     ├─ generate_protocol.py            # yaml → python(백엔드)/c(아두이노) 생성 스크립트
+│  ├─ mechanics/
+│  │  ├─ cad/
+│  │  └─ prints/
+│  ├─ electronics/
+│  │  ├─ schematics/
+│  │  └─ bom.csv
+│  └─ protocol/
+│     ├─ messages.yaml
+│     ├─ generate_protocol.py
 │     └─ templates/
 │        ├─ arduino_protocol.h.j2
 │        └─ backend_protocol.py.j2
 │
-└─ Display/                              # 사용자에 보이는 모든 소프트웨어
-   ├─ Backend/                           # FastAPI (비전/제어/시리얼/WS)
+└─ Display/
+   ├─ Backend/
    │  ├─ app/
-   │  │  ├─ main.py                      # 엔트리 (uvicorn)
-   │  │  ├─ api/                         # REST/WebSocket 엔드포인트
+   │  │  ├─ main.py
+   │  │  ├─ api/
    │  │  │  ├─ routes.py
-   │  │  │  └─ ws.py                     # 실시간 상태/로그 스트림
-   │  │  ├─ control/                     # 상태머신/시퀀스 제어
+   │  │  │  └─ ws.py
+   │  │  ├─ control/
    │  │  │  ├─ state_machine.py
    │  │  │  └─ alignment.py
-   │  │  ├─ vision/                      # YOLO 추론/후처리
+   │  │  ├─ vision/
    │  │  │  ├─ infer.py
    │  │  │  └─ postprocess.py
-   │  │  ├─ serial_bridge/               # Arduino UART 브릿지
+   │  │  ├─ serial_bridge/
    │  │  │  ├─ uart.py
-   │  │  │  └─ protocol.py               # (HW/protocol에서 생성된 파일)
-   │  │  ├─ schemas/                     # DTO/Pydantic
+   │  │  │  └─ protocol.py
+   │  │  ├─ schemas/
    │  │  │  └─ types.py
-   │  │  ├─ services/                    # 비즈 로직(압력 모니터 등)
-   │  │  ├─ utils/                       # 공통 유틸(로그/시간/필터)
-   │  │  └─ config.py                    # 환경변수/포트/시리얼 경로 등
+   │  │  ├─ services/
+   │  │  ├─ utils/
+   │  │  └─ config.py
    │  └─ models/
-   │     └─ weights/                     # YOLO 가중치 (Git LFS 권장)
+   │     └─ weights/
    │        ├─ best.pt
    │        ├─ best_wCrop.pt
    │        ├─ yolov8n.pt
    │        ├─ yolov8n_100.pt
    │        └─ yolov8n_200.pt
-   └─ Frontend/                          # React + TS (Vite)
+   └─ Frontend/
       ├─ index.html
       ├─ src/
-      │  ├─ assets/                      # 정적 리소스(SVG, 이미지)
+      │  ├─ assets/
       │  │  ├─ chevron.svg
       │  │  ├─ Icon.svg
       │  │  └─ Wine_1.svg
       │  ├─ constants/
-      │  │  └─ constants.ts              # API/WS 엔드포인트, 네트워크 상수 등
+      │  │  └─ constants.ts
       │  ├─ lib/
-      │  │  └─ ws.ts                     # WebSocket 유틸/싱글턴
-      │  ├─ pages/                       # 라우트 단위 화면
+      │  │  └─ ws.ts
+      │  ├─ pages/
       │  │  ├─ Splash.tsx
       │  │  ├─ MainPage.tsx
       │  │  ├─ OpenWine.tsx
@@ -296,8 +296,8 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
       │  │  └─ Router.tsx
       │  ├─ styles/
       │  │  └─ index.css
-      │  ├─ App.tsx                      # 앱 루트/레이아웃
-      │  └─ main.tsx                     # React 엔트리
+      │  ├─ App.tsx
+      │  └─ main.tsx
       └─ yarn.lock
 
 ```
