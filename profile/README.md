@@ -225,28 +225,9 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
 2025ESWContest_자유공모_1091_와인퀸_파일구조
 .
 ├─ HW/
-│  ├─ arduino/
-│  │  ├─ src/
-│  │  │  ├─ HW_Control.ino
-│  │  │  └─ modules/
-│  │  └─ include/
-│  │     ├─ Constants/
-│  │     ├─ CUP/
-│  │     ├─ Queue/
-│  │     ├─ StepperMulti/
-│  │     └─ Waterpump/
-│  ├─ mechanics/
-│  │  ├─ cad/
-│  │  └─ prints/
-│  ├─ electronics/
-│  │  ├─ schematics/
-│  │  └─ bom.csv
-│  └─ protocol/
-│     ├─ messages.yaml
-│     ├─ generate_protocol.py
-│     └─ templates/
-│        ├─ arduino_protocol.h.j2
-│        └─ backend_protocol.py.j2
+│  └─ arduino/
+│     └─ src/
+│        └─ HW_Control.ino
 │
 └─ Display/
    ├─ Backend/
