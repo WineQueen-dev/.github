@@ -286,11 +286,9 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
 ## Video
 
 - (시연 영상 링크 또는 썸네일 이미지)
-  <img src="assets/TempMachine.png" width="300" height="500">
+  <img src="assets/HW.png" width="300" height="500">
 
 ## Team Member
-
-<img src="assets/team.png" width="300" height="300">
 
 <br>
 
