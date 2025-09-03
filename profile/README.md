@@ -227,30 +227,11 @@ YOLO 비전 + 로봇팔 + 기압 센서 피드백 제어로, 마지막 한 방�
    ├─ Backend/
    │  ├─ app/
    │  │  ├─ main.py
-   │  │  ├─ api/
-   │  │  │  ├─ routes.py
-   │  │  │  └─ ws.py
-   │  │  ├─ control/
-   │  │  │  ├─ state_machine.py
-   │  │  │  └─ alignment.py
-   │  │  ├─ vision/
-   │  │  │  ├─ infer.py
-   │  │  │  └─ postprocess.py
-   │  │  ├─ serial_bridge/
-   │  │  │  ├─ uart.py
-   │  │  │  └─ protocol.py
-   │  │  ├─ schemas/
-   │  │  │  └─ types.py
-   │  │  ├─ services/
-   │  │  ├─ utils/
-   │  │  └─ config.py
-   │  └─ models/
-   │     └─ weights/
-   │        ├─ best.pt
-   │        ├─ best_wCrop.pt
-   │        ├─ yolov8n.pt
-   │        ├─ yolov8n_100.pt
-   │        └─ yolov8n_200.pt
+   │  │  ├─ best.pt
+   │  │  ├─ best_wCrop.pt
+   │  │  ├─ yolov8n.pt
+   │  │  ├─ yolov8n_100.pt
+   │  │  └─ yolov8n_200.pt
    └─ Frontend/
       ├─ index.html
       ├─ src/
